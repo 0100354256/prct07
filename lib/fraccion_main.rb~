@@ -1,0 +1,124 @@
+
+require "lib/gcd.rb"
+
+class Fraccion
+  attr_reader :a, :b
+
+  def initialize (a, b)
+    # Excepciones
+    raise unless (b != 0)         # Si no es distinto de 0 el Denominador
+    raise unless a.is_a?(Numeric) # Si no es numérico el Numerador
+    raise unless b.is_a?(Numeric) # Si no es numérico el Denominador
+
+    # Inicializamos Variables
+    @a, @b = a, b
+  end
+
+  #Fraccion de la forma: [a/b]
+  def to_s
+    "#@a/#@b"
+  end
+
+  #Obtiene el numerador 
+  def num
+    return @a
+  end
+
+  #Obtiene el denominador 
+  def denom
+    return @b
+  end
+
+  #Se muestra en modo flotante
+  def to_f
+    @a.to_f/@b.to_f #Convierte el Numerador y el Denominador a Punto Flotante
+  end
+
+  #Sobrecarga el Operador "==" para comparar dos Fracciones
+  def == (other)
+    return ((@a == other.num) && (@b == other.denom)) ? true : false;
+  end
+  
+  # Valor absoluto de la fraccion
+  def abs
+    absoluto = Fraccion.new(@a.abs, @b.abs)
+  end
+
+  # Fraccion reciproca
+  def reciproco
+    reciproca = Fraccion.new(@b, @a)
+  end
+
+  # Opuesto de una fracción
+  def -@
+    mcd = gcd(@a, @b)
+    a = @a / mcd
+    b = @b / mcd
+    
+    if (b < 0)  # Comprueba si el denominador es negativo
+      return Fraccion.new(a,-b)
+    else 
+      return Fraccion.new(-a,b)
+    end
+  end
+  
+  #Sobrecarga el Operador "+" para sumar dos Fracciones
+  def + (other)
+    denominador = @b * other.denom
+    num1 = @a * other.denom
+    num2 = other.num * @b
+    numerador = num1 + num2
+    mcd = gcd(numerador,denominador)
+    numerador /= mcd
+    denominador /= mcd
+    
+    Fraccion.new(numerador,denominador)
+  end
+
+  #Sobrecarga el Operador "-" para restar dos Fracciones
+  def - (other)
+    denominador = @b * other.denom
+    num1 = @a * other.denom
+    num2 = other.num * @b
+    numerador = num1 - num2
+    mcd = gcd(numerador, denominador)
+    numerador /= mcd
+    denominador /= mcd
+
+    Fraccion.new(numerador,denominador)
+  end
+
+  #Sobrecarga el Operador "*" para multiplicar dos Fracciones
+  def * (other)
+    a = @a * other.num
+    b = @b * other.denom
+    mcd = gcd(a,b)
+    a /= mcd
+    b /= mcd
+
+    Fraccion.new(a,b)
+  end
+
+  #Sobrecarga el Operador "/" para dividir dos Fracciones
+  def / (other)
+    a = @a * other.denom
+    b = @b * other.num
+    mcd = gcd(a,b)
+    a /= mcd
+    b /= mcd
+
+    Fraccion.new(a,b)
+  end
+
+  #Resto de fracciones
+  def % (other)
+    resto = Fraccion.new(0,1)
+
+    #Mientras pueda seguir restando...
+    while (resto.to_f >= other.to_f) do
+      resto = resto - other
+    end
+
+    return resto
+  end
+end
