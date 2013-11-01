@@ -7,3 +7,4 @@
     
 4. Creación del fichero .travis.yml
 5. Se actualiza el Rakefile
+6. Se crea el Gemfile
