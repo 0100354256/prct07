@@ -36,10 +36,10 @@ describe Fraccion do
         @A.to_f.should eq(2.5)
       end
 
-      it "Comprobar igualdad de fracciones" do
-        result = @A == @B
-        result.should eq(false)	
-      end
+#       it "Comprobar igualdad de fracciones" do
+#         result = @A == @B
+#         result.should eq(false)	
+#       end
 
       it "Calcula el valor absoluto" do
         @B.abs.to_s.should eq("8/7")
@@ -79,24 +79,24 @@ describe Fraccion do
         result.to_s.should eq("0/1")
       end
 
-      it "Fraccion >" do
-        result = @A > @C
-        result.should eq(true)
-      end
-
-      it "Fraccion <" do
-        result = @C < @A
-        result.should eq(true)
-      end
-
-      it "Fraccion >=" do
-        result = @A >= @C
-        result.should eq(true)
-      end
-
-      it "Fraccion <=" do
-        result = @C <= @A
-        result.should eq(true)
-      end
+#       it "Fraccion >" do
+#         result = @A > @C
+#         result.should eq(true)
+#       end
+# 
+#       it "Fraccion <" do
+#         result = @C < @A
+#         result.should eq(true)
+#       end
+# 
+#       it "Fraccion >=" do
+#         result = @A >= @C
+#         result.should eq(true)
+#       end
+# 
+#       it "Fraccion <=" do
+#         result = @C <= @A
+#         result.should eq(true)
+#       end
     end
 end

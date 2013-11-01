@@ -2,6 +2,7 @@
 require "lib/gcd.rb"
 
 class Fraccion
+  include Comparable;
   attr_reader :a, :b
 
   def initialize (a, b)
@@ -32,11 +33,6 @@ class Fraccion
   #Se muestra en modo flotante
   def to_f
     @a.to_f/@b.to_f #Convierte el Numerador y el Denominador a Punto Flotante
-  end
-
-  #Sobrecarga el Operador "==" para comparar dos Fracciones
-  def == (other)
-    return ((@a == other.num) && (@b == other.denom)) ? true : false;
   end
   
   # Valor absoluto de la fraccion
@@ -121,23 +117,12 @@ class Fraccion
     return resto
   end
   
-  #Comprueba si una fraccion es > que otra
-  def > (other)
-    return (self.to_f > other.to_f) ? true : false 
+  # Operador <=>
+  def <=>(other)
+  
+    raise TypeError, 'Tipo de bjeto inválido' unless other.is_a? Fraccion
+    self.to_float <=> other.to_float
   end
   
-  # Comprueba si una fracción es < que otra
-  def < (other)
-    return (self.to_f < other.to_f) ? true : false
-  end
-	
-  # Comprueba si una fracción es >= que otra
-  def >= (other)
-    return (self.to_f >= other.to_f) ? true : false
-  end
-
-  # Comprueba si una fracción es <= que otra
-  def <= (other)
-    return (self.to_f <= other.to_f) ? true : false
-  end
+  
 end
