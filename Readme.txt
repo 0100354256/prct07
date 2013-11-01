@@ -6,3 +6,4 @@
     Debido a que no se consigue solucionar, se procede a realizar los commit/push desde una sola cuenta.
     
 4. Creación del fichero .travis.yml
+5. Se actualiza el Rakefile
